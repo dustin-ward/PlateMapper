@@ -26,11 +26,11 @@
 				e.popup.update();
 			});
 
-		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+		L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
 			attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`
 		}).addTo(map);
 
-		L.geoJson(states).addTo(map);
+		geojson = L.geoJson(states, {style: style, onEachFeature: onEachFeature}).addTo(map);
 	});
 
 	onDestroy(() => {
@@ -51,6 +51,46 @@
 	}
 
 	// Style Functions
+	let style = () => {
+		return {
+			fillColor: "#666666",
+			weight: 2,
+			opacity: 1,
+			color: '#222222',
+			dashArray: '3',
+			fillOpacity: 0.7
+		};
+	}
+
+	let highlightFeature = (e) => {
+		var layer = e.target;
+
+		layer.setStyle({
+			weight: 5,
+			color: '#BBBBBB',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		layer.bringToFront();
+	}
+
+	var geojson;
+	let resetHighlight = (e) => {
+		geojson.resetStyle(e.target);
+	}
+
+	let zoomToFeature = (e) => {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	let onEachFeature = (feature, layer) => {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
 
 </script>
 
