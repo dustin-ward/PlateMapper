@@ -1,9 +1,14 @@
 <script lang="ts">
 	import '../app.css';
+	import HomePage from './HomePage.svelte';
+	import AuthPage from './AuthPage.svelte';
+	import db from './db.js';
+
+	let user = db.user;
 </script>
 
-<div class="w-full h-screen">
-	<h1>Main Screen</h1>
-
-	<a href="/map">Go to maps</a>
-</div>
+{#if $user}
+	<HomePage/>
+{:else}
+	<AuthPage/>
+{/if}
