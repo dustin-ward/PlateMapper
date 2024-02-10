@@ -64,8 +64,9 @@
 	}
 
 	let getColour = (f) => {
-		let selected = completed.filter((e) => {return e.id == f.id;});
-		if (selected.length == 0 || !selected[0].status) {
+		let selected = Object.keys(completed)
+          .filter( key => f.id == key )
+		if (selected.length == 0 || !completed[selected[0]]) {
 			return "#666666";
 		} else {
 			return "#61b531";
@@ -91,6 +92,9 @@
 	}
 
 	let zoomToFeature = (e) => {
+		let f = e.target.feature
+		completed[f.id] = !completed[f.id];
+
 		map.fitBounds(e.target.getBounds());
 	}
 
