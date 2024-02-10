@@ -7,6 +7,7 @@
 	export let bounds: L.LatLngBoundsExpression | undefined = undefined;
 	export let view: L.LatLngExpression | undefined = undefined;
 	export let zoom: number | undefined = undefined;
+	export let completed;
 
 	const dispatch = createEventDispatcher();
 
@@ -51,15 +52,24 @@
 	}
 
 	// Style Functions
-	let style = () => {
+	let style = (f) => {
 		return {
-			fillColor: "#666666",
+			fillColor: getColour(f),
 			weight: 2,
 			opacity: 1,
 			color: '#222222',
 			dashArray: '3',
 			fillOpacity: 0.7
 		};
+	}
+
+	let getColour = (f) => {
+		let selected = completed.filter((e) => {return e.id == f.id;});
+		if (selected.length == 0 || !selected[0].status) {
+			return "#666666";
+		} else {
+			return "#61b531";
+		}
 	}
 
 	let highlightFeature = (e) => {
