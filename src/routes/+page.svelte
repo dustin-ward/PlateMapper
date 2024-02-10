@@ -29,7 +29,7 @@
 				/>
 				</svg>
 
-				<Popup>Like & Subscribe! This is a very loooooooooooong title and it has many characters.</Popup>
+				<Popup>Test Popup</Popup>
 			</Marker>
 		{/each}
 	</Leaflet>

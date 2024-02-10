@@ -2,7 +2,7 @@
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick } from 'svelte';
 	import L from 'leaflet';
 	import 'leaflet/dist/leaflet.css';
-	import { statesData } from './us-states.js'
+	import { states } from './states-provinces';
 
 	export let bounds: L.LatLngBoundsExpression | undefined = undefined;
 	export let view: L.LatLngExpression | undefined = undefined;
@@ -30,7 +30,7 @@
 			attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>,&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>`
 		}).addTo(map);
 
-		L.geoJson(statesData).addTo(map);
+		L.geoJson(states).addTo(map);
 	});
 
 	onDestroy(() => {
@@ -49,6 +49,9 @@
 			map.setView(view, zoom);
 		}
 	}
+
+	// Style Functions
+
 </script>
 
 <div class="w-full h-full" bind:this={mapElement}>
