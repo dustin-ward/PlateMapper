@@ -8,7 +8,7 @@
 	const initialView: LatLngExpression = [55, -100];
 </script>
 
-<div class="w-full h-screen">
-	<Leaflet view={initialView} completed={data.completed} zoom={4}>
+<div class="w-full h-full">
+	<Leaflet view={initialView} dbmap={data.map} zoom={4}>
 	</Leaflet>
 </div>

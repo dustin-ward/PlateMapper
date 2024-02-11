@@ -43,7 +43,7 @@ let getScore = (map) => {
 				</div>
 			</ListgroupItem>
 		{/each}
-		<a href="/map/new" class="flex items-center pl-5 p-3 text-lg font-medium dark:bg-stone-800 dark:hover:bg-stone-700 dark:text-fuchsia-800 rounded-b-lg">
+		<a href="/newmap" class="flex items-center pl-5 p-3 text-lg font-medium dark:bg-stone-800 dark:hover:bg-stone-700 dark:text-fuchsia-800 rounded-b-lg">
 			<PlusSolid class="w-6 h-6 ms-1 me-2" />
 			New Map
 		</a>

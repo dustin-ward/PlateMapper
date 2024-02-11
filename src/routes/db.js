@@ -35,18 +35,15 @@ export default {
 			return data;
 		},
 
-		// async get(email) {
-		// 	const { data } = await supabase
-		// 		.from('boards')
-		// 		.select('id, title, lists ( id, title, position, cards ( id, description, position ))')
-		// 		.eq('id', id)
-		// 		.order('position')
-		// 		.order('position', { foreignTable: 'lists' })
-		// 		.order('position', { foreignTable: 'lists.cards' })
-		// 		.single();
+		async get(mapid) {
+			const { data } = await supabase
+				.from('maps')
+				.select('*')
+				.eq('id', mapid)
+				.single();
 
-		// 	return data;
-		// },
+			return data;
+		},
 
 		async create(map) {
 			const { data } = await supabase.from('maps').insert(map).select().maybeSingle();
@@ -56,7 +53,10 @@ export default {
 		async update(map) {
 			const { data } = await supabase
 				.from('maps')
-				.update({ name: map.name })
+				.update({
+					name: map.name,
+					states: map.states,
+				})
 				.match({ id: map.id })
 				.select()
 				.maybeSingle();

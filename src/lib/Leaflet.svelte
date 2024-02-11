@@ -2,12 +2,13 @@
 	import { onMount, onDestroy, setContext, createEventDispatcher, tick } from 'svelte';
 	import L from 'leaflet';
 	import 'leaflet/dist/leaflet.css';
+	import db from '../routes/db.js';
 	import { states } from './states-provinces';
 
 	export let bounds: L.LatLngBoundsExpression | undefined = undefined;
 	export let view: L.LatLngExpression | undefined = undefined;
 	export let zoom: number | undefined = undefined;
-	export let completed;
+	export let dbmap;
 
 	const dispatch = createEventDispatcher();
 
@@ -64,9 +65,7 @@
 	}
 
 	let getColour = (f) => {
-		let selected = Object.keys(completed)
-          .filter( key => f.id == key )
-		if (selected.length == 0 || !completed[selected[0]]) {
+		if (dbmap.states === null || dbmap.states.indexOf(f.id) == -1) {
 			return "#666666";
 		} else {
 			return "#61b531";
@@ -93,7 +92,17 @@
 
 	let zoomToFeature = (e) => {
 		let f = e.target.feature
-		completed[f.id] = !completed[f.id];
+		if (dbmap.states === null) {
+			dbmap.states = [f.id];
+		} else {
+			let idx = dbmap.states.indexOf(f.id);
+			if (idx != -1) {
+				dbmap.states.splice(idx,1);
+			} else {
+				dbmap.states = [...dbmap.states, f.id];
+			}
+		}
+		db.maps.update(dbmap);
 
 		map.fitBounds(e.target.getBounds());
 	}
