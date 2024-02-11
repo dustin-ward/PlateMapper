@@ -7,20 +7,22 @@
 	}
 </script>
 
-<div class='w-full h-full flex flex-col'>
-	<Navbar class='fixed dark:bg-transparent text-white m-3'>
-	  <NavBrand href="/" class="self-center whitespace-nowrap text-4xl font-semibold">
-		<span class="material-symbols-outlined m-3">no_crash</span>
-		<span><span class='text-fuchsia-800'>Plate</span>Mapper</span>
-	  </NavBrand>
-	  <NavHamburger/>
-	  <NavUl>
-		<NavLi class='text-2xl' href="/">Home</NavLi>
-		<NavLi class='text-2xl' href="/map">Maps</NavLi>
-		<NavLi class='text-2xl' href="/" on:click={logout}>Logout</NavLi>
-	  </NavUl>
-	</Navbar>
-	<div class='bg-gradient-to-r from-stone-900 to-stone-800 w-full h-screen'>
+<div class='h-screen flex flex-col bg-gradient-to-r from-stone-900 to-stone-800'>
+	<div class='flex'>
+		<Navbar class='dark:bg-transparent text-white m-3'>
+			<NavBrand href="/" class="self-center whitespace-nowrap text-4xl font-semibold">
+				<span class="material-symbols-outlined m-3">no_crash</span>
+				<span><span class='text-fuchsia-800'>Plate</span>Mapper</span>
+			</NavBrand>
+			<NavHamburger/>
+			<NavUl>
+				<NavLi class='text-2xl' href="/">Home</NavLi>
+				<NavLi class='text-2xl' href="/map">Maps</NavLi>
+				<NavLi class='text-2xl' href="/" on:click={logout}>Logout</NavLi>
+			</NavUl>
+		</Navbar>
+	</div>
+	<div class='flex-1'>
 		<slot/>
 	</div>
 </div>

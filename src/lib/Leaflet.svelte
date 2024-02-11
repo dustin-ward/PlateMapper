@@ -117,6 +117,7 @@
 
 </script>
 
+<!--<div class="w-full h-[calc(100vh-7rem)] relative mt-28" bind:this={mapElement}>-->
 <div class="w-full h-full" bind:this={mapElement}>
 	{#if map}
 		<slot />

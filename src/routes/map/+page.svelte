@@ -31,7 +31,7 @@ let deleteMap = async () => {
 }
 </script>
 
-<div class="wrapper flex flex-col items-center justify-center h-screen">
+<div class="wrapper flex flex-col items-center justify-center mt-36">
 	<h3 class="mb-10 text-center text-5xl font-medium dark:text-white">Your <span class='text-fuchsia-800'>Maps</span></h3>
 	<Listgroup class="bg-transparent border-none shadow-lg w-1/2 dark:bg-stone-800">
 		{#each maps as map}

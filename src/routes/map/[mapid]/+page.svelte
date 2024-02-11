@@ -10,5 +10,7 @@
 
 <div class="w-full h-full">
 	<Leaflet view={initialView} dbmap={data.map} zoom={4}>
+		<div class='bg-red w-full h-40 fixed'>
+		</div>
 	</Leaflet>
 </div>

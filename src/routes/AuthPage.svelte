@@ -20,9 +20,9 @@
 	<title>Login</title>
 </svelte:head>
 
-<div class="wrapper flex items-center justify-center h-screen">
+<div class="wrapper flex items-center justify-center mt-36">
 	{#if sent}
-		<Card class="dark:bg-stone-800 dark:text-white dark:border-none">
+		<Card class="dark:bg-stone-800 dark:text-white dark:border-none mt-28">
 			<div in:fly class="notification flex flex-col items-center justify-center">
 				<svg
 					class="icon m-2 text-fuchsia-800"
