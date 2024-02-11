@@ -51,6 +51,11 @@ export default {
 			return data;
 		},
 
+		async delete(mapid) {
+			const { error } = await supabase.from('maps').delete().eq('id', mapid);
+			return error;
+		},
+
 		async update(map) {
 			const { data } = await supabase
 				.from('maps')
