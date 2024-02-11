@@ -1,4 +1,8 @@
 <script>
+	import { Section, Register } from "flowbite-svelte-blocks";
+	import { Button, Card, Label, Input } from "flowbite-svelte";
+	import { EnvelopeSolid } from 'flowbite-svelte-icons';
+
 	import { fly, fade } from 'svelte/transition';
 	import db from './db';
 
@@ -6,12 +10,9 @@
 		sent = false;
 
 	async function submit() {
+		console.log("SUBMIT", email)
 		await db.signIn(email);
 		sent = true;
-	}
-
-	function focus(element) {
-		element.focus();
 	}
 </script>
 
@@ -19,124 +20,58 @@
 	<title>Login</title>
 </svelte:head>
 
-<div class="wrapper">
+<div class="wrapper flex items-center justify-center h-screen">
 	{#if sent}
-		<div class="container">
-			<div in:fly class="notification">
+		<Card class="dark:bg-stone-800 dark:text-white dark:border-none">
+			<div in:fly class="notification flex flex-col items-center justify-center">
 				<svg
-					class="icon"
+					class="icon m-2 text-fuchsia-800"
 					height="32"
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
 					viewBox="0 0 24 24"
 					stroke="currentColor"
 				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-					/>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+				/>
 				</svg>
 				<h2>Sent you a link, check your email</h2>
 			</div>
-		</div>
+		</Card>
 	{:else}
-		<div class="container" in:fade>
-			<h1>Sign in</h1>
-
-			<form on:submit|preventDefault={submit}>
-				<label>
-					<span>E-mail Address</span>
-					<input name="email" type="email" required bind:value={email} use:focus />
-				</label>
-				<button>
-					<svg
-						class="icon"
-						height="24"
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-						/>
-					</svg>
-					<span>Send me a magic link</span>
-				</button>
-			</form>
-		</div>
+		<Section name="login">
+		  <Register href="/">
+			<svelte:fragment slot="top">
+			  <span class="material-symbols-outlined m-8 w-8 h-8">no_crash</span>
+			</svelte:fragment>
+			<div class="p-6 space-y-4 w-80 md:space-y-6 sm:p-8 bg-stone-800 rounded-lg shadow-lg">
+			  <form class="flex flex-col space-y-6" on:submit|preventDefault={submit}>
+				<h3 class="text-xl font-medium dark:text-white p-0 text-center">Send me a sign-in link:</h3>
+				<Label class="space-y-2">
+				  <span>Your email</span>
+				  <Input type="email" name="email" placeholder="name@company.com" class='dark:bg-transparent' required bind:value={email}>
+					 <EnvelopeSolid slot="left" class="w-5 h-5" />
+				  </Input>
+				</Label>
+				<Button type="submit" class="w-full dark:bg-fuchsia-800">Sign in</Button>
+			  </form>
+			</div>
+		  </Register>
+		</Section>
 	{/if}
 </div>
 
 <style>
-	.wrapper {
-		display: flex;
-		justify-content: center;
-		place-items: center;
-		height: 100vh;
-		width: 100vw;
-	}
-	.container {
-		display: flex;
-		flex-direction: column;
-		min-width: 400px;
-		padding: 4rem;
-		background: #0005;
-		border-radius: 3px;
-	}
-
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	label {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	h1,
-	h2 {
-		color: white;
-	}
-
-	h1 {
-		margin-top: 0;
-	}
-
-	label span {
-		color: white;
-	}
-
-	input {
-		display: block;
-		width: 100%;
-	}
-
-	button {
-		background: white;
-		padding: 1rem;
-		border-radius: 3px;
-		background: #4dc7dc;
-		font-size: 0.9rem;
-		color: #444;
-	}
-
-	.icon {
-		vertical-align: middle;
-	}
-
-	.notification {
-		display: flex;
-		place-items: center;
-		gap: 16px;
-		color: white;
-	}
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 600,
+  'GRAD' 0,
+  'opsz' 48;
+  font-size: 48px;
+}
 </style>
