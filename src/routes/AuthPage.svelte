@@ -1,7 +1,7 @@
 <script>
 	import { Section, Register } from "flowbite-svelte-blocks";
 	import { Button, Card, Label, Input } from "flowbite-svelte";
-	import { EnvelopeSolid } from 'flowbite-svelte-icons';
+	import { EnvelopeSolid, UserCircleSolid } from 'flowbite-svelte-icons';
 
 	import { fly, fade } from 'svelte/transition';
 	import db from './db';
@@ -46,14 +46,14 @@
 		<Section name="login">
 		  <Register href="/">
 			<svelte:fragment slot="top">
-			  <span class="material-symbols-outlined m-8 w-8 h-8">no_crash</span>
+				<UserCircleSolid class="text-white h-24 w-24"/>
 			</svelte:fragment>
-			<div class="p-6 space-y-4 w-80 md:space-y-6 sm:p-8 bg-stone-800 rounded-lg shadow-lg">
+			<div class="p-6 space-y-4 md:space-y-6 sm:p-8 bg-stone-800 rounded-lg shadow-lg">
 			  <form class="flex flex-col space-y-6" on:submit|preventDefault={submit}>
-				<h3 class="text-xl font-medium dark:text-white p-0 text-center">Send me a sign-in link:</h3>
+				<h3 class="text-4xl font-medium dark:text-white p-0 text-center">Sign In <span class="text-fuchsia-800">/</span> Register</h3>
 				<Label class="space-y-2">
 				  <span>Your email</span>
-				  <Input type="email" name="email" placeholder="name@company.com" class='dark:bg-transparent' required bind:value={email}>
+				  <Input size="lg" type="email" name="email" placeholder="name@company.com" class='dark:bg-transparent' required bind:value={email}>
 					 <EnvelopeSolid slot="left" class="w-5 h-5" />
 				  </Input>
 				</Label>
@@ -64,14 +64,3 @@
 		</Section>
 	{/if}
 </div>
-
-<style>
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 600,
-  'GRAD' 0,
-  'opsz' 48;
-  font-size: 48px;
-}
-</style>

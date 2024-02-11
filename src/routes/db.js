@@ -28,52 +28,51 @@ export default {
 	signOut() {
 		return supabase.auth.signOut();
 	},
-	// boards: {
-	// 	async all() {
-	// 		const { data } = await supabase.from('boards').select('*').order('position');
+	maps: {
+		async all() {
+			const { data } = await supabase.from('maps').select('*').order('created_at');
 
-	// 		return data;
-	// 	},
+			return data;
+		},
 
-	// 	async get(id) {
-	// 		const { data } = await supabase
-	// 			.from('boards')
-	// 			.select('id, title, lists ( id, title, position, cards ( id, description, position ))')
-	// 			.eq('id', id)
-	// 			.order('position')
-	// 			.order('position', { foreignTable: 'lists' })
-	// 			.order('position', { foreignTable: 'lists.cards' })
-	// 			.single();
+		// async get(email) {
+		// 	const { data } = await supabase
+		// 		.from('boards')
+		// 		.select('id, title, lists ( id, title, position, cards ( id, description, position ))')
+		// 		.eq('id', id)
+		// 		.order('position')
+		// 		.order('position', { foreignTable: 'lists' })
+		// 		.order('position', { foreignTable: 'lists.cards' })
+		// 		.single();
 
-	// 		return data;
-	// 	},
+		// 	return data;
+		// },
 
-	// 	async create(board) {
-	// 		const { data } = await supabase.from('boards').insert(board).select().maybeSingle();
+		async create(map) {
+			const { data } = await supabase.from('maps').insert(map).select().maybeSingle();
+			return data;
+		},
 
-	// 		return data;
-	// 	},
+		async update(map) {
+			const { data } = await supabase
+				.from('maps')
+				.update({ name: map.name })
+				.match({ id: map.id })
+				.select()
+				.maybeSingle();
 
-	// 	async update(board) {
-	// 		const { data } = await supabase
-	// 			.from('boards')
-	// 			.update({ title: board.title })
-	// 			.match({ id: board.id })
-	// 			.select()
-	// 			.maybeSingle();
+			return data;
+		},
 
-	// 		return data;
-	// 	},
+		// async sort(board) {
+		// 	const { data } = await supabase.rpc('sort_board', {
+		// 		board_id: board.id,
+		// 		list_ids: board.lists.map((list) => list.id)
+		// 	});
 
-	// 	async sort(board) {
-	// 		const { data } = await supabase.rpc('sort_board', {
-	// 			board_id: board.id,
-	// 			list_ids: board.lists.map((list) => list.id)
-	// 		});
-
-	// 		return data;
-	// 	}
-	// },
+		// 	return data;
+		// }
+	},
 
 	// lists: {
 	// 	async create(board, listData) {
