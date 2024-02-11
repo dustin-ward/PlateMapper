@@ -7,6 +7,7 @@ export const supabase = createClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_KEY);
 const userStore = writable();
 
 supabase.auth.getSession().then(({ data }) => {
+	console.log(data.session);
 	userStore.set(data.session?.user);
 });
 
