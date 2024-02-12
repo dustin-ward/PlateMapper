@@ -104,6 +104,10 @@
 		}
 		db.maps.update(dbmap);
 
+		dispatch('selectState', {
+			state: f.id,
+		});
+
 		map.fitBounds(e.target.getBounds());
 	}
 
